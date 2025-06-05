@@ -79,10 +79,10 @@ function closeDropdown(menu) {
     closeDropdown(nested);
   });
 
-  // Always remove dropdown-open right away to prevent visual mismatch
-  toggle?.classList.remove("dropdown-open");
+  toggle?.classList.remove("dropdown-open"); // Immediate cleanup
 
   animateShrink(menu, 250, () => {
+    toggle?.classList.remove("dropdown-open"); // Fallback in case it persisted
     if (icon) {
       icon.style.transition = "transform 250ms ease-in-out";
       icon.style.transform = "rotateX(0deg)";
@@ -90,6 +90,7 @@ function closeDropdown(menu) {
     menu.removeAttribute("open");
   });
 }
+
 
 
 function toggleDropdown(toggle, event) {
@@ -122,6 +123,16 @@ document.addEventListener("click", e => {
     e.stopPropagation();
   }
 });
+
+document.addEventListener("click", e => {
+  const isClickInsideDropdown = e.target.closest("[dropdown='true']");
+  if (!isClickInsideDropdown) {
+    document.querySelectorAll("[dropdown-menu='true'][open]").forEach(menu => {
+      closeDropdown(menu);
+    });
+  }
+});
+
 
 // === HOVER RE-INIT ===
 function reinitializeDropdowns() {
