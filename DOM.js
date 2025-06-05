@@ -79,8 +79,10 @@ function closeDropdown(menu) {
     closeDropdown(nested);
   });
 
+  // Always remove dropdown-open right away to prevent visual mismatch
+  toggle?.classList.remove("dropdown-open");
+
   animateShrink(menu, 250, () => {
-    toggle?.classList.remove("dropdown-open");
     if (icon) {
       icon.style.transition = "transform 250ms ease-in-out";
       icon.style.transform = "rotateX(0deg)";
@@ -88,6 +90,7 @@ function closeDropdown(menu) {
     menu.removeAttribute("open");
   });
 }
+
 
 function toggleDropdown(toggle, event) {
   const parentDropdown = toggle.closest("[dropdown='true']");
