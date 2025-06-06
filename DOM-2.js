@@ -239,6 +239,10 @@ selectedEls.forEach(selected => {
   }
 });
 
+window.openDropdown = openDropdown;
+window.closeDropdown = closeDropdown;
+
+
 // DROPDOWN FUNCTION ENDS ------------------------------------------------
 
 
