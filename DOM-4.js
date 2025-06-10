@@ -118,6 +118,18 @@ document.addEventListener("click", e => {
 });
 
 document.addEventListener("click", e => {
+  const closeTrigger = e.target.closest("[close-dropdown='true']");
+  if (closeTrigger) {
+    const parentDropdown = closeTrigger.closest("[dropdown='true']");
+    const menu = parentDropdown?.querySelector("[dropdown-menu='true'][open]");
+    if (menu) {
+      closeDropdown(menu);
+    }
+  }
+});
+
+	
+document.addEventListener("click", e => {
   if (e.target.closest("[dropdown-menu='true']")) {
     e.stopPropagation();
   }
