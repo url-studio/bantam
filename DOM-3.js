@@ -76,11 +76,13 @@ function closeDropdown(menu) {
   const icon = toggle?.querySelector("[dropdown-icon='true']");
 
   menu.querySelectorAll("[dropdown-menu='true'][open]").forEach(nested => {
-    closeDropdown(nested);
+    closeDropdown(nested); // Recursive close
   });
 
+  // Always remove dropdown-open immediately
+  toggle?.classList.remove("dropdown-open");
+
   animateShrink(menu, 250, () => {
-    toggle?.classList.remove("dropdown-open");
     if (icon) {
       icon.style.transition = "transform 250ms ease-in-out";
       icon.style.transform = "rotateX(0deg)";
@@ -88,6 +90,7 @@ function closeDropdown(menu) {
     menu.removeAttribute("open");
   });
 }
+
 
 function toggleDropdown(toggle, event) {
   const parentDropdown = toggle.closest("[dropdown='true']");
