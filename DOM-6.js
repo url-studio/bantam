@@ -65,16 +65,10 @@ function openDropdown(menu) {
     icon.style.transform = "rotateX(180deg)";
   }
 
-  // Delay animation start so content like editors can render
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      animateGrow(menu, 250, () => {
-        menu.style.height = "auto";
-      });
-    });
+  animateGrow(menu, 250, () => {
+    menu.style.height = "auto";
   });
 }
-
 
 function closeDropdown(menu) {
   const parentDropdown = menu.closest("[dropdown='true']");
@@ -265,7 +259,6 @@ window.closeDropdown = closeDropdown;
 
 
 // DROPDOWN FUNCTION ENDS ------------------------------------------------
-
 
 
     
