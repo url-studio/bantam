@@ -97,7 +97,9 @@ function initializePercentageDonuts(scope = document) {
 
     segments.forEach(({ styleClass, count }) => {
       const percent = count / totalUnits;
-      const segmentAngle = 360 * percent;
+      const percentSafe = Math.min(percent, 0.999999);
+      const segmentAngle = 360 * percentSafe;
+
       const start = currentAngle;
       const end = start + segmentAngle;
       currentAngle = end;
