@@ -33,26 +33,31 @@
           datalabelFormatter = (value) => `$${Number(value).toLocaleString()}`;
         }
 
-        // Apply plugins
-        options.plugins = {
-          ...options.plugins,
-          tooltip: {
-            callbacks: {
-              label: tooltipCallback
-            }
-          },
-          datalabels: {
-            anchor: 'end',
-            align: 'end',
-            clamp: true,     // keep labels within chart area
-            clip: false,     // let them overflow safely
-            formatter: datalabelFormatter,
-            color: '#000',
-            font: {
-              weight: 'bold'
-            }
-          }
-        };
+        // Apply plugins, conditionally disabling datalabels if explicitly set to false
+          options.plugins = {
+            ...options.plugins,
+            tooltip: {
+              callbacks: {
+                label: tooltipCallback
+              }
+            },
+            ...(options.plugins?.datalabels === false
+              ? { datalabels: false }
+              : {
+                  datalabels: {
+                    anchor: 'end',
+                    align: 'end',
+                    clamp: true,     // keep labels within chart area
+                    clip: false,     // let them overflow safely
+                    formatter: datalabelFormatter,
+                    color: '#000',
+                    font: {
+                      weight: 'bold'
+                    }
+                  }
+                })
+          };
+
 
         const canvas = document.createElement('canvas');
         canvas.id = `chart-${index}`;
