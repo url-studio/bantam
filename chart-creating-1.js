@@ -81,6 +81,7 @@
                 clip: false
               }
             },
+            scales: options.scales || {},
             plugins: {
               legend: {
                 display: options.legend?.display ?? true,
